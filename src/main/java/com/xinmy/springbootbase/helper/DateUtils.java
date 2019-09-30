@@ -1,18 +1,3 @@
-/*
- * Copyright 2015-2020 reserved by jf61.com.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package com.xinmy.springbootbase.helper;
 
 import java.text.ParseException;
@@ -50,6 +35,14 @@ public class DateUtils {
     public static Integer date2Int(Date date) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
         return Integer.valueOf(dateFormat.format(date));
+    }
+
+    /** 判断两个时间是否为同一天 */
+    public static boolean isSameDay(Date date1, Date date2) {
+        if (date1 == null || date2 == null) {
+            return false;
+        }
+        return DateUtils.isSameDay(date1, date2);
     }
 
 }

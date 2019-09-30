@@ -4,6 +4,7 @@ import com.xinmy.springbootbase.interceptor.ContextInjectInterceptor;
 import io.swagger.annotations.Api;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.ResponseEntity;
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -22,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @SpringBootApplication
+@ServletComponentScan
 @EnableSwagger2
 public class App {
     public static void main(final String[] args) {

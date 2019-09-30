@@ -1,19 +1,3 @@
-/*
- * Copyright 2015-2020 reserved by jufeng.com.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.xinmy.springbootbase.helper;
 
 import java.util.List;
@@ -29,13 +13,14 @@ import java.util.regex.Pattern;
 public final class StringUtils {
 
     /**
+     *
      */
     private StringUtils() {
         super();
     }
 
     /**
-     * 
+     *
      */
     public static boolean isEmpty(final String str) {
         return null == str || str.trim().length() == 0;
@@ -145,13 +130,13 @@ public final class StringUtils {
      * @desc 将字符串数组按指定分隔符拼接起来.
      */
     public static String concatStrs(final List<String> values, final String comma) {
-    	if ( null != values) {
-    		Optional<String> opt = values.stream().reduce((a, b) -> a + comma + b);
-    		if (opt.isPresent()) {
-    			return opt.get();
-    		}
-    	}
-    	return null;
+        if (null != values) {
+            Optional<String> opt = values.stream().reduce((a, b) -> a + comma + b);
+            if (opt.isPresent()) {
+                return opt.get();
+            }
+        }
+        return null;
     }
 
     /**
@@ -177,5 +162,5 @@ public final class StringUtils {
         }
         return null;
     }
-    
+
 }

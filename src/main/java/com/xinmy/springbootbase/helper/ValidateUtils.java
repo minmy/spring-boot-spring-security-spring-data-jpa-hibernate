@@ -17,7 +17,7 @@ package com.xinmy.springbootbase.helper;
 
 /**
  * @desc 
- * @author gglu
+ * @author lijianxin
  */
 public class ValidateUtils {
 		/**

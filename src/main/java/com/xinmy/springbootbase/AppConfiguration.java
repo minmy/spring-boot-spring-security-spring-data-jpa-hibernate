@@ -19,10 +19,12 @@ import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter4;
 import com.xinmy.springbootbase.interceptor.ContextInjectInterceptor;
+import org.hibernate.SessionFactory;
 import org.hibernate.validator.HibernateValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -35,13 +37,9 @@ import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
-import org.springframework.web.servlet.config.annotation.CorsRegistration;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.*;
 
+import javax.persistence.EntityManagerFactory;
 import javax.validation.ValidatorFactory;
 import java.util.ArrayList;
 import java.util.List;
@@ -87,10 +85,10 @@ public class AppConfiguration extends WebMvcConfigurerAdapter {
     public void addInterceptors(final InterceptorRegistry registry) {
         super.addInterceptors(registry);
         //
-        ContextInjectInterceptor interceptor = this.ctxInjector();
-        InterceptorRegistration registration = registry.addInterceptor(interceptor);
-        // 排除swagger相关路径
-        registration.excludePathPatterns("swagger-ui.html", "swagger-resources/**", "/webjars/**");
+//        ContextInjectInterceptor interceptor = this.ctxInjector();
+//        InterceptorRegistration registration = registry.addInterceptor(interceptor);
+//        // 排除swagger相关路径
+//        registration.excludePathPatterns("swagger-ui.html", "swagger-resources/**", "/webjars/**");
         //
     }
 
@@ -117,4 +115,15 @@ public class AppConfiguration extends WebMvcConfigurerAdapter {
     protected static class TransactionManagementConfiguration {
 
     }
+
+    @Bean
+    public SessionFactory sessionFactory(@Qualifier("entityManagerFactory") EntityManagerFactory emf){
+        return emf.unwrap(SessionFactory.class);
+    }
+
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+        registry.addViewController("/login").setViewName("login");
+    }
+
 }
